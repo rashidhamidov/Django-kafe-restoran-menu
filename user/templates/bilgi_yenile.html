@@ -1,0 +1,145 @@
+{% extends "homebase.html" %}
+    {% block tittle %}{{ ayar.baslik }}{% endblock %}
+    	{% block head %}
+        <link rel="shortcut icon" href='{{ayar.icon.url}}'/>
+        {% endblock %}
+	{% block header %}
+    {% include "header.html" %} {% endblock %}
+    {% block content %}
+	<!-- Start Bradcaump area -->
+	
+        <div class="ht__bradcaump__area">
+		{% load static %}
+            <div class="ht__bradcaump__container">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="bradcaump__inner text-center">
+                                <nav class="bradcaump-inner">
+                                  <a class="breadcrumb-item" href="/">Ana Sayfa</a>
+                                  <span class="brd-separetor"><img src="{% static 'images/icons/brad.png' %}" alt="separator images"></span>
+                                  <span class="breadcrumb-item active">Üye Sayfası</span>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Bradcaump area -->
+		
+		<div class="container_contact" >
+			{% block uye_panel %} {% include "uye_panel.html" %} {% endblock %}
+			<div class="contact" align="center">
+			<h1>Profil Guncelle</h1>
+			<br/>
+			<table align="center">
+			<tr>
+			<td align="center"><form method="post" enctype="multipart/form-data">{% csrf_token %}
+			<fieldset >
+			{% if messages %}
+								{% for message in messages %}
+									<div class="alert alert-{{message.tags}}" role="alert">
+									{{ message }}
+									</div>
+									{% endfor %}
+							{% endif %}
+			{{ user_form.as_p }}
+			{{ profile_form.as_p }}
+			</fieldset>
+			<button id="dugme_gonder" type="submit">Yenile</button>
+			</form></td>
+			<img src="{{user.userprofile.image.url}}" width="200px" height="210px" style="border-radius:10px;"/>
+			</tr>
+        		</table>
+        	</div>
+			
+			</div>
+        <style>
+.container_contact {
+background-color:lightblue;
+width:80%;
+margin-left:10%;
+height:1300px;
+
+}
+.contact_f{
+	float:left;
+	width:20%;
+	height:auto;
+	border:1px solid #ddd;
+	height:100%;
+
+}
+.contact_f ul {
+margin-top:50px;
+width:80%;
+background-color:lightgreen;
+
+}
+.contact_f ul li {
+border:1px solid #ddd;
+width:100%;
+height:40px;
+line-height: 22px;
+padding:5px 0 0 0;
+margin-bottom:2px;
+
+}
+.contact_f ul li a{
+font:bold 16px tahoma;
+width:150px;
+height:40px;
+line-height: 22px;
+
+}
+.contact{
+	float:left;
+	width:80%;
+	height:auto;
+
+}
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+
+
+
+.contact input,select {
+  color:#111;
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight:500;
+  font-size: 16px;
+  border-radius: 5px;
+  line-height: 14px;
+  background-color:#ddd;
+  transition: all 0.3s;
+  padding: 8px;
+  margin-bottom:5px;
+  width:100%;
+  box-sizing: border-box;
+  outline:0;
+}
+#dugme_gonder{
+color:#111;
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight:500;
+  font-size: 16px;
+  border-radius: 5px;
+  line-height: 14px;
+  transition: all 0.3s;
+  padding: 8px;
+  margin-bottom:5px;
+  width:100%;
+  box-sizing: border-box;
+  outline:0;
+background-color:lightgreen;
+}
+#dugme_gonder:hover {
+background-color:#20cc20;
+color:#f2ddcc;
+}
+</style>
+        <!-- End Contact Form -->
+		
+ 
+ 
+        {% endblock %}

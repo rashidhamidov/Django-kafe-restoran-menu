@@ -1,0 +1,133 @@
+{% extends "homebase.html" %}
+    {% block tittle %}{{ ayar.baslik }}{% endblock %}
+    	{% block head %}
+        <link rel="shortcut icon" href='{{ayar.icon.url}}'/>
+        {% endblock %}
+	{% block header %}
+    {% include "header.html" %} {% endblock %}
+    {% block content %}
+	<!-- Start Bradcaump area -->
+	
+        <div class="ht__bradcaump__area">
+		{% load static %}
+            <div class="ht__bradcaump__container">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="bradcaump__inner text-center">
+                                <nav class="bradcaump-inner">
+                                  <a class="breadcrumb-item" href="/">Ana Sayfa</a>
+                                  <span class="brd-separetor"><img src="{% static 'images/icons/brad.png' %}" alt="separator images"></span>
+                                  <span class="breadcrumb-item active">Üye Sayfası</span>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Bradcaump area -->
+		{% if user.id is not None  %}
+		<div class="container_contact" >
+			{% block uye_panel %} {% include "uye_panel.html" %} {% endblock %}
+			<div class="contact" align="center">
+			<h1>Uye Bilgiler</h1>
+			<br>
+			
+			{% if messages %}
+								{% for message in messages %}
+									<div class="alert alert-{{message.tags}}" role="alert">
+									{{ message }}
+									</div>
+									{% endfor %}
+							{% endif %}
+			
+			<img src="{{profile.image.url}}" width="250px" height="280px" style="border-radius:10px;"/>
+			<table style="margin-top:10px;">
+			<tr>
+			<td>Isim Soyisim</td>
+			<td>{{profile.user.first_name}} {{profile.user.last_name}}</td>
+			</tr>
+			<tr>
+			<td>Email</td>
+			<td>{{profile.user.email}}</td>
+			</tr>
+			<tr>
+			<td>Telefon</td>
+			<td>{{profile.phone}}</td>
+			</tr>
+			<tr>
+			<td>Adress</td>
+			<td>{{profile.adress}}</td>
+			</tr>
+        		</table>
+        	</div>
+			
+			</div>
+			{% else %}
+			<h1>Uye Paneline erişmek için lütfen <a href="/login" >Giriş</a> yapınız</h1>
+			{% endif %}
+        <style>
+.container_contact {
+background-color:lightblue;
+width:80%;
+margin-left:10%;
+height:700px;
+
+}
+.contact_f{
+	float:left;
+	width:20%;
+	height:auto;
+	border:1px solid #ddd;
+	height:100%;
+
+}
+.contact_f ul {
+margin-top:50px;
+width:80%;
+background-color:lightgreen;
+
+}
+.contact_f ul li {
+border:1px solid #ddd;
+width:100%;
+height:40px;
+line-height: 22px;
+padding:5px 0 0 0;
+margin-bottom:2px;
+
+}
+.contact_f ul li a{
+font:bold 16px tahoma;
+width:150px;
+height:40px;
+line-height: 22px;
+
+}
+.contact{
+	float:left;
+	width:80%;
+	height:auto;
+
+}
+.contact table tr td {
+  color:#111;
+  font:normal 22px calibri;
+  border-radius: 5px;
+  line-height: 22px;
+  background-color:#ddd;
+  transition: all 0.3s;
+  padding: 13px;
+  margin-bottom: 15px;
+  width:40%;
+  box-sizing: border-box;
+  outline:0;
+}
+
+</style>
+        <!-- End Contact Form -->
+		
+ 
+ 
+        {% endblock %}

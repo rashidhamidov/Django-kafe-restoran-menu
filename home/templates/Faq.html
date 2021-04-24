@@ -1,0 +1,58 @@
+{% extends "homebase.html" %}
+    {% block tittle %}Faq Sayfası{% endblock %}
+    	{% block head %}
+		
+        <link rel="shortcut icon" href='{{ayar.icon.url}}'/>
+							
+        {% endblock %}
+	
+    {% block header %} 
+        {% include "header.html" %}  
+        {% endblock %}
+    {% block content %}
+	<!-- Start Bradcaump area -->
+	
+        <div class="ht__bradcaump__area">
+		{% load static %}
+            <div class="ht__bradcaump__container">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="bradcaump__inner text-center">
+                                <nav class="bradcaump-inner">
+                                  <a class="breadcrumb-item" href="/">Ana Sayfa</a>
+                                  <span class="brd-separetor"><img src="{% static 'images/icons/brad.png' %}" alt="separator images"></span>
+                                  <span class="breadcrumb-item active">Sıkça sorulan sorular</span>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Bradcaump area -->
+		<section class="dcare__choose__us__area section-padding--lg bg--white">
+			<div class="container" style="width:600px;">
+			<div id="accordion">
+								
+									{% for rs in faq %}
+					  <b> {{rs.question}}</b>
+					  <div>
+						<p>
+						{{rs.answer}}
+						</p>
+					  </div>
+  {%endfor%}
+  </div>
+  <script>
+  $( function() {
+    $( "#accordion" ).accordion({
+      collapsible: true
+    });
+  } );
+  </script>
+  </div>
+		</section>
+	
+	
+        {% endblock %}

@@ -1,0 +1,96 @@
+
+<div class="container_contact" >
+<h2>Sipariş Detay</h2>
+<div class="contact" align="center">
+<table style="margin-top:10px;">
+			<tr>
+			<td>Ürün</td>
+			<td>Resim</td>
+			<td>Fiyat</td>
+			<td>Adet</td>
+			<td>Durum</td>
+			<td>Toplam</td>
+			<td>Tarih</td>
+			</tr>
+			{% for rs in orders %}
+			<tr>
+			<td>{{ rs.urun}}</td>
+			<td><img src="{{ rs.urun.image.url }}" width="100px" height="60px" ></td>
+			<td>{{ rs.urun.price }} TL</td>
+			<td>{{ rs.quantity}}</td>
+			<td>{{ rs.status }}</td>
+			<td>{{ rs.amount }} TL</td>
+			<td>{{ rs.create_at }}</td>
+			</tr>
+			{% endfor %}
+        		</table>
+				</div>
+				</div>
+<style>
+.container_contact {
+background-color:lightblue;
+width:100%;
+height:700px;
+
+	overflow-x:hidden;
+	overflow-y:scroll;
+
+}
+.contact_f{
+	float:left;
+	width:20%;
+	height:auto;
+	border:1px solid #ddd;
+	height:100%;
+
+}
+.contact_f ul {
+margin-top:50px;
+width:80%;
+background-color:lightgreen;
+
+}
+.contact_f ul li {
+border:1px solid #ddd;
+width:100%;
+height:40px;
+line-height: 22px;
+padding:5px 0 0 0;
+margin-bottom:2px;
+
+}
+.contact_f ul li a{
+font:bold 16px tahoma;
+width:150px;
+height:40px;
+line-height: 22px;
+
+}
+.contact{
+	float:left;
+	width:100%;
+	height:auto;
+
+}
+.contact table tr td {
+  color:#111;
+  font:normal 18px Calibri;
+  border-radius: 5px;
+  background-color:#ddd;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+  outline:0;
+  text-align:center;
+}
+#dugme_gonder{
+ padding: 2px 10px;
+ width:100px;
+ border-radius:4px;
+ border:2px solid green;
+ background-color:#640000;
+ color:lightyellow;
+}
+#dugme_gonder:hover {
+background-color:#20cc20;
+color:#f2ddcc;
+</style>

@@ -1,0 +1,33 @@
+<!-- Strat Slider Area -->
+
+<div class="slide__carosel owl-carousel owl-theme" style="height:400px;width:60%;margin-left:20%;">
+{% for rs in sliderdata %}
+    <div style ="background-image:url('{{ rs.image.url }}');height:400px;
+	background-size:100% 100%;
+	transition:.4s;
+	">
+		
+        <div class="container" >
+            <div class="row">
+                <div class="col-md-12 col-lg-12 col-sm-12">
+                    <div class="slider__activation">
+                        <!-- Start Single Slide -->
+                        <div class="slide">
+                            <div class="slide__inner">
+								<br><br>
+                                <h1>{{ rs.title }}</h1>
+								<br><br><br><br><br><br><br><br>
+                                <div class="slider__btn">
+                                    <a class="dcare__btn" href="/urun/{{rs.id}}/{{rs.slug}}">Daha Fazla</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Single Slide -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+     {% endfor %}
+</div>
+<!-- End Slider Area -->

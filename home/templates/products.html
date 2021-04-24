@@ -1,0 +1,73 @@
+{% extends "homebase.html" %}
+ {% block tittle %}{{ categoridata.title }}{% endblock %}
+ {% block head %}
+<link rel="shortcut icon" href='{{ayar.icon.url}}' /> {% endblock %}
+ {% block header %} {% include "header.html" %} {% endblock %} 
+ {% block content %}
+<!-- Start Bradcaump area -->
+
+<div class="ht__bradcaump__area">
+    {% load static %}
+    <div class="ht__bradcaump__container">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="bradcaump__inner text-center">
+
+                        <nav class="bradcaump-inner">
+                            <a class="breadcrumb-item" href="/">Ana Sayfa</a>
+                            <span class="breadcrumb-item active">{{ categoridata.title }}</span>
+                        </nav>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Bradcaump area -->
+<section class="dcare__shop__grid  section-padding--lg bg--white">
+    <div class="container">
+        <div class="row">
+            <!-- Shop Grid -->
+            <div class="col-lg-12">
+                <div class="row shop-grid-page">
+
+                    <!-- Start Single Product -->
+                    {% for rs in products %}
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                        <div class="product--2 product__grid">
+                            <div class="product__imges">
+                                <a href="/urun/{{rs.id}}/{{rs.slug}}">
+                                    <img src="{{rs.image.url}}" alt="product images" style="height:200px">
+                                </a>
+                                <div class="pro__label">
+                                    <span>{{rs.price}} TL</span>
+                                </div>
+                            </div>
+                            <div class="product__inner">
+                                <div class="pro__title">
+                                    <h4><a href="/urun/{{rs.id}}/{{rs.slug}}">{{rs.title}}</a></h4>
+                                    <span>{{rs.description}}</span>
+                                </div>
+                                <div class="class__btn">
+                                    <a class="dcare__btn btn__gray min__height-btn" href="/order/addurun/{{rs.id}}">Siparişe Ekle</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                    <!-- End Single Product -->
+
+                    <!-- Start Pagination -->
+
+                    <!-- End Pagination -->
+                </div>
+                <!-- End Shop Grid -->
+            </div>
+        </div>
+</section>
+
+
+{% endblock %}

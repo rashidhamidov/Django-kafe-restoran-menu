@@ -1,0 +1,54 @@
+{% extends "homebase.html" %}
+    {% block tittle %}{{ products.title }}{% endblock %}
+    	{% block head %}
+        <link rel="shortcut icon" href='{{ayar.icon.url}}'/>
+        {% endblock %}
+	
+    {% block header %} 
+        {% include "header.html" %}  
+        {% endblock %}
+    {% block content %}
+	<!-- Start Bradcaump area -->
+	
+        <div class="ht__bradcaump__area">
+		{% load static %}
+            <div class="ht__bradcaump__container">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="bradcaump__inner text-center">
+                                <nav class="bradcaump-inner">
+                                  <a class="breadcrumb-item" href="/">Ana Sayfa</a>
+								  <span class="breadcrumb-item">{{ products.Categori }}</span>
+                                  <span class="breadcrumb-item active">{{ products.title }}</span>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		<div class="container">
+        		<div class="row">
+        			<div class="col-lg-9">
+        				<div class="class__quality__desc" >
+								<img width="500px" align="left" src="{{ products.image.url }}" style ="
+												transition:.4s;
+												margin:20px;
+												">
+									{{products.detail|safe}}
+							</div>
+							
+
+        				</div>
+        			</div>
+        			<!-- Start Sidebar -->
+					{% for rs in images %}
+				<img src="{{rs.image.url}}" style="width:200px;height:150px;margin:10px;">
+				
+				
+				{% endfor %}
+        		</div>
+				
+				
+				{%endblock%}

@@ -1,0 +1,39 @@
+{% extends "homebase.html" %} 
+{% block tittle %}Referanslar{% endblock %} 
+{% block head %}
+<link rel="shortcut icon" href='{{ayar.icon.url}}' /> 
+{% endblock %} 
+{% block header %}
+ {% include "header.html" %}
+ {% endblock %}
+
+ {% block content %}
+<!-- Start Bradcaump area -->
+
+<div class="ht__bradcaump__area">
+    {% load static %}
+    <div class="ht__bradcaump__container">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="bradcaump__inner text-center">
+                        <nav class="bradcaump-inner">
+                            <a class="breadcrumb-item" href="/">Ana Sayfa</a>
+                            <span class="brd-separetor"><img src="{% static 'images/icons/brad.png' %}" alt="separator images"></span>
+                            <span class="breadcrumb-item active">Referanslar</span>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Bradcaump area -->
+<section class="dcare__choose__us__area section-padding--lg bg--white">
+    <div class="container">
+        {{ ayar.referanslar|safe }}
+    </div>
+</section>
+
+
+{% endblock %}

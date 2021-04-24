@@ -1,0 +1,141 @@
+{% extends "homebase.html" %}
+    {% block tittle %}Orders{% endblock %}
+    	{% block head %}
+        <link rel="shortcut icon" href='{{ayar.icon.url}}'/>
+        {% endblock %}
+	{% block header %}
+    {% include "header.html" %} {% endblock %}
+    {% block content %}
+	<!-- Start Bradcaump area -->
+	
+        <div class="ht__bradcaump__area">
+		{% load static %}
+            <div class="ht__bradcaump__container">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="bradcaump__inner text-center">
+                                <nav class="bradcaump-inner">
+                                  <a class="breadcrumb-item" href="/">Ana Sayfa</a>
+                                  <span class="brd-separetor"><img src="{% static 'images/icons/brad.png' %}" alt="separator images"></span>
+                                  <span class="breadcrumb-item active">Üye Sayfası</span>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Bradcaump area -->
+		
+		<div class="container_contact" >
+			{% block uye_panel %} {% include "uye_panel.html" %} {% endblock %}
+			<div class="contact" align="center">
+			<h1>Siparişlerim </h1>
+			{% if messages %}
+								{% for message in messages %}
+									<div class="alert alert-{{message.tags}}" role="alert">
+									{{ message|safe }}
+									</div>
+									{% endfor %}
+							{% endif %}
+							
+			<table style="margin-top:10px;">
+			<tr>
+			<td>Masa</td>
+			<td>User</td>
+			<td>Hesap</td>
+			<td>Durum</td>
+			<td>Tarih</td>
+			<td>Görüntüle</td>
+			</tr>
+			{% for rs in orders %}
+			<tr>
+			<td><a href="/urun/{{rs.id}}/{{rs.slug}}">{{ rs.masa}}</a></td>
+			<td>{{ rs.user }}</td>
+			<td>{{ rs.total}} tl</td>
+			<td>{{ rs.status }}</td>
+			<td>{{ rs.create_at }}</td>
+			<td><a href="javascript:;" onclick="window.open('/user/orderdetail/{{rs.id}}','orderdetail','height=500px,width=800px')">Detay</a></td>
+			</tr>
+			{% endfor %}
+        		</table>
+        	</div>
+			
+			</div>
+        <style>
+.container_contact {
+background-color:lightblue;
+width:80%;
+margin-left:10%;
+height:700px;
+
+	overflow-x:hidden;
+	overflow-y:scroll;
+
+}
+.contact_f{
+	float:left;
+	width:20%;
+	height:auto;
+	border:1px solid #ddd;
+	height:100%;
+
+}
+.contact_f ul {
+margin-top:50px;
+width:80%;
+background-color:lightgreen;
+
+}
+.contact_f ul li {
+border:1px solid #ddd;
+width:100%;
+height:40px;
+line-height: 22px;
+padding:5px 0 0 0;
+margin-bottom:2px;
+
+}
+.contact_f ul li a{
+font:bold 16px tahoma;
+width:150px;
+height:40px;
+line-height: 22px;
+
+}
+.contact{
+	float:left;
+	width:80%;
+	height:auto;
+
+}
+.contact table tr td {
+  color:#111;
+  font:normal 18px Calibri;
+  border-radius: 5px;
+  line-height: 22px;
+  background-color:#ddd;
+  transition: all 0.3s;
+  padding: 13px;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+  outline:0;
+}
+#dugme_gonder{
+ padding: 2px 10px;
+ width:100px;
+ border-radius:4px;
+ border:2px solid green;
+ background-color:#640000;
+ color:lightyellow;
+}
+#dugme_gonder:hover {
+background-color:#20cc20;
+color:#f2ddcc;
+</style>
+        <!-- End Contact Form -->
+		
+ 
+ 
+        {% endblock %}

@@ -1,0 +1,62 @@
+{% extends "homebase.html" %}
+    {% block tittle %}{{ aratilan_kelime }}{% endblock %}
+    	{% block head %}
+        <link rel="shortcut icon" href='{{ayar.icon.url}}'/>
+        {% endblock %}
+	
+    {% block header %} 
+        {% include "header.html" %}  
+        {% endblock %}
+    {% block content %}
+	<!-- Start Bradcaump area -->
+	
+        <div class="ht__bradcaump__area">
+		{% load static %}
+            <div class="ht__bradcaump__container">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="bradcaump__inner text-center">
+                                <nav class="bradcaump-inner">
+                                  <a class="breadcrumb-item" href="/">Ana Sayfa</a>
+                                 
+                                  <span class="breadcrumb-item active">Aratılan Kelime</span> <span class="brd-separetor"><img src="{% static 'images/icons/brad.png' %}" alt="separator images"></span>
+                                  <span class="breadcrumb-item active"style="color:#c00;">{{aratilan_kelime}}</span>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Bradcaump area -->
+		<section class="dcare__choose__us__area section-padding--lg bg--white">
+			<div class="container">
+					<table class="search_table">
+					<tr>
+					<td>Resim</td>
+					<td>İsim</td>
+					<td>Kategori</td>
+					</tr>
+					
+					{%  for rs in products %}
+					<tr>
+					<td><a href="/urun/{{rs.id}}/{{rs.slug}}"><img src="{{rs.image.url}}" alt=""/ width="150px;"></a></td>
+					<td width="500px;"><a id="search_table_isim" href="/urun/{{rs.id}}/{{rs.slug}}">{{rs.title}}</a></td>
+					<td><a  href="/categori/{{rs.Categori_id}}/{{rs.Categori.slug}}">{{ rs.Categori }}</td>
+					</tr>
+					{% endfor %}
+					</table>
+			</div>
+			<style>
+				.search_table{
+					width:90%;
+					margin-left:5%;
+					height:auto;
+				}
+				#search_table_isim{font:bold 18px Tahoma;}
+			</style>
+		</section>
+	
+	
+        {% endblock %}

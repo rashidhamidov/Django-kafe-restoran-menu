@@ -1,0 +1,284 @@
+{% extends "homebase.html" %}
+    {% block tittle %}{{ products.title }}{% endblock %}
+    	{% block head %}
+        <link rel="shortcut icon" href='{{ayar.icon.url}}'/>
+        {% endblock %}
+	
+    {% block header %} 
+        {% include "header.html" %}  
+        {% endblock %}
+    {% block content %}
+	<!-- Start Bradcaump area -->
+	
+        <div class="ht__bradcaump__area">
+		{% load static %}
+            <div class="ht__bradcaump__container">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="bradcaump__inner text-center">
+                                <nav class="bradcaump-inner">
+                                  <a class="breadcrumb-item" href="/">Ana Sayfa</a>
+								  <a class="breadcrumb-item" href="/categori/{{products.Categori_id}}/{{products.Categori.slug}}">{{ products.Categori }}</a>
+                                  <span class="breadcrumb-item active">{{ products.title }}</span>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Bradcaump area -->
+		<section class="page-class-details bg--white section-padding--lg">
+
+        	<div class="container">
+        		<div class="row">
+        			<div class="col-lg-9">
+        				<div class="class__quality__desc">
+
+        					<div class="class__thumb">
+        						<div class="courses__type d-flex justify-content-between">
+        							<ul class="d-flex">
+        								<li><b>{{products.title}}:</b> <span><b>{{products.description}}</b></span></li>
+        							</ul>
+        						</div>
+        						<div class="slide__carosel owl-carousel owl-theme" style="height:360px;width:60%;margin-left:20%;">
+								<div style ="background-image:url('{{ products.image.url }}');height:300px;
+												background-size:100% 100%;
+												transition:.4s;
+												">
+													
+													<div class="container" >
+														<div class="row">
+															<div class="col-md-12 col-lg-12 col-sm-12">
+															</div>
+														</div>
+													</div>
+												</div>
+										{% for rs in images %}
+											<div style ="background-image:url('{{ rs.image.url }}');height:300px;
+											background-size:100% 100%;
+											transition:.4s;
+											">
+												
+												<div class="container" >
+													<div class="row">
+														<div class="col-md-12 col-lg-12 col-sm-12">
+														</div>
+													</div>
+												</div>
+											</div>
+											 {% endfor %}
+											</div>
+        					</div>
+							<div class="class-details-inner">
+								<div class="courses__inner">
+									<h2><b>{{products.title}}</b></h2>
+									<ul>
+										<li>Tarih :  <i class="fa fa-calendar"></i><span>{{products.create_at}}</span></li>
+										<form action="/order/addurun/{{products.id}}" method="post">
+											{% csrf_token %}
+											<span class="text-uppercase"><b>Adet:</b></span>
+											<input name="quantity" class="input-box" style="width:50px;"type="number" min='0' value='1'>
+											<input type="submit" class="dcare__btn btn__gray min__height-btn" value="Siparişe Ekle">
+                            
+                                </form>
+									</ul></div>
+
+								<div class="class__nav nav justify-content-between" role="tablist">
+		                            <a class="nav-item nav-link active" data-toggle="tab" href="#nav-teacher" role="tab">İçerik</a>
+		                            <a class="nav-item nav-link" data-toggle="tab" href="#nav-review" role="tab">Yorum Yap</a>
+	                        	</div>
+
+	                        	<div class="class__tab__content--inner">
+	                        		<div class="teacher__view single-class-content tab-pane fade show active" id="nav-teacher" role="tablist">
+	                        			{{products.detail|safe}}
+
+	                        		</div>
+										
+									<div class="class__review single-class-content tab-pane fade" id="nav-review" role="tablist">
+									<h4>Son yorumlar</h4>
+        					<!-- Single Widget -->
+							<div class="single__widget recent__comment" style="overflow:auto;height:300px;">
+     
+								
+								{%  for rs in comment %}
+        								    <h6 style="color:lightgreen;"><b> {{ rs.subject}}</b></h6>
+											<span>{{ rs.comment}} </span ><br>
+        									<i class="fa fa-user"></i> <span style="color:green;">{{ rs.user }}</span><br>
+        									<i class="fa fa-calendar"></i> <span>{{ rs.create_at }}</span><br>
+											<span class="ti-star"style="color:yellow;"></span>
+											{% if rs.rate > 1 %}<span class="ti-star"style="color:yellow;"></span>{% endif %}
+											{% if rs.rate > 2 %}<span class="ti-star"style="color:yellow;"></span>{% endif %}
+											{% if rs.rate > 3 %}<span class="ti-star"style="color:yellow;"></span>{% endif %}
+											{% if rs.rate > 4 %}<span class="ti-star"style="color:yellow;"></span>{% endif %}
+											<p style="color:lightgreen;">
+											________________________________________
+											</p>
+									{% endfor %}
+        					</div>
+										<div class="classs__review__inner">
+											<form action="/menu/addcomment/{{products.id}}" method="post">
+											
+												{% csrf_token %}
+												
+												<div class="input__box">
+													<span>Konu</span>
+													<input required="required" name="subject" type="text" placeholder="Konu"/>
+												</div>
+												<div class="input__box">
+													<span>Yorumunuz</span>
+													<textarea required="required" name="comment" placeholder="Yorum"></textarea>
+												</div>
+												<div class="input__box">
+													<span>Puanınız</span>
+														<ul class="rating">
+															<li><input id="star1"onclick="rating_choose(this.id)" class="fa fa-star" type="radio" name="rate" value="1"/></li>
+															<li><input id="star2"onclick="rating_choose(this.id)" class="fa fa-star" type="radio" name="rate" value="2"/></li>
+															<li><input id="star3"onclick="rating_choose(this.id)" class="fa fa-star" type="radio" name="rate" value="3"/></li>
+															<li><input id="star4"onclick="rating_choose(this.id)" class="fa fa-star" type="radio" name="rate" value="4"/></li>
+															<li><input id="star5"onclick="rating_choose(this.id)" class="fa fa-star" type="radio" name="rate" value="5"/></li>
+														</ul>
+														<script>
+														function rating_choose(a){
+															if(a=="star1"){
+															document.getElementById(a).style.color="yellow";
+															document.getElementById("star2").style.color="black";
+															document.getElementById("star3").style.color="black";
+															document.getElementById("star4").style.color="black";
+															document.getElementById("star5").style.color="black";
+															}
+															else if(a=="star2"){
+															document.getElementById("star1").style.color="yellow";
+															document.getElementById(a).style.color="yellow";
+															
+															document.getElementById("star3").style.color="black";
+															document.getElementById("star4").style.color="black";
+															document.getElementById("star5").style.color="black";
+															}
+															else if(a=="star3"){
+															document.getElementById("star1").style.color="yellow";
+															document.getElementById("star2").style.color="yellow";
+															document.getElementById(a).style.color="yellow";
+															
+															document.getElementById("star4").style.color="black";
+															document.getElementById("star5").style.color="black";
+															}
+															else if(a=="star4"){
+															document.getElementById("star1").style.color="yellow";
+															document.getElementById("star2").style.color="yellow";
+															document.getElementById("star3").style.color="yellow";
+															document.getElementById(a).style.color="yellow";
+															
+															document.getElementById("star5").style.color="black";
+															}
+															else if(a=="star5"){
+															document.getElementById("star1").style.color="yellow";
+															document.getElementById("star2").style.color="yellow";
+															document.getElementById("star3").style.color="yellow";
+															document.getElementById("star4").style.color="yellow";
+															document.getElementById(a).style.color="yellow";
+															}
+															else{
+															document.getElementById("star1").style.color="black";
+															document.getElementById("star2").style.color="black";
+															document.getElementById("star3").style.color="black";
+															document.getElementById("star4").style.color="black";
+															document.getElementById("star5").style.color="black";
+															}
+														}
+														
+														</script>
+												</div>
+												{% if user.id is not None %}
+												<div class="submit__btn--2">
+													<button class="dcare__btn btn__org hover__theme" type="submit">Yorum Yap</button>
+												</div>
+												{% else %}
+												<span style="color:red;"> Yorum yapa bilmeniz <a href="/login" >Giriş</a> yapınız.</span>
+												{% endif %}
+												
+											</form>
+										</div>
+									</div>
+	                        	</div>
+							</div>
+							<!-- Start Related Class -->
+							<div class="related__class__wrapper">
+								<h2 class="title">Sizin İçin Seçtiklerimiz</h2>
+								<div class="row">
+										{% for rs in benzer  %}
+										{% if rs.id != products.id %}
+									<!-- Start Single Classs -->
+									<div class="col-lg-4 col-md-6 col-sm-6 col-12">
+										<div class="related__classs" >
+											<div class="calss__thumb">
+												<a href="/urun/{{rs.id}}/{{rs.slug}}">
+													<img style="height:200px;" src="{{rs.image.url}}" alt="class images"/>
+												</a>
+											</div>
+											<div class="class__details">
+												<h2><a href="/urun/{{rs.id}}/{{rs.slug}}">{{rs.title}}</a></h2>
+											</div>
+											<div class="class__hover__action">
+												<div class="classs__hover__inner">
+													<h2><a href="/urun/{{rs.id}}/{{rs.slug}}">{{rs.description}}</a></h2>
+													<div class="class__btn">
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									{%endif%}
+									{% endfor %}
+									<!-- End Single Classs -->
+
+									<!-- End Single Classs -->
+
+								</div>
+							</div>
+							<!-- End Related Class -->
+
+        				</div>
+        			</div>
+        			<!-- Start Sidebar -->
+        			<div class="col-lg-3">
+        				<div class="sidebar__widgets sidebar--right">
+							
+							
+        					<!-- End Widget -->
+        					<!-- Single Widget -->
+        					<div class="single__widget recent__post">
+        						<h4>En Çok Tercih Edilenler </h4>
+								<ul>
+									{%  for rs in soneklenen %}
+									{% if rs.tip != 'Menu' %}
+									<li>
+										<a href="/urun/{{rs.id}}/{{rs.slug}}"><img src="{{rs.image.url}}" alt="post images"></a>
+										<div class="post__content">
+											<h6><a href="/urun/{{rs.id}}/{{rs.slug}}">{{rs.title}}</a></h6>
+											<span class="date"><i class="fa fa-calendar"></i>{{rs.create_at}}</span>
+										</div>
+									</li>
+									{% endif %}
+									{% endfor %}
+								</ul>
+        					</div>
+        					<!-- End Widget -->
+        					
+
+        					
+
+
+        					
+
+        				</div>
+        			</div>
+        			<!-- End Sidebar -->
+        		</div>
+        	</div>
+        </section>
+        <!-- End Class Details -->
+	
+	
+        {% endblock %}

@@ -1,0 +1,138 @@
+<!-- Header -->
+<header id="header" class="jnr__header header--one clearfix">
+    <!-- Start Header Top Area -->
+    <div class="junior__header__top">
+        <div class="container" style="margin-top:5px;margin-bottom:10px;">
+            <div class="row">
+                <div class="col-md-5 col-lg-6 col-sm-12">
+                    <form action="/search/" class="single__widget search" method="post">
+                        {% csrf_token %}
+                        <input id="query" name="query" type="text" placeholder="Anahtar Kelime" style="width:200px;height:25px;border:1px solid lightblue;" />
+                        <button type="submit" style="border-radius:4px;border:2px solid lightgreen;background-color:lightblue;"><i class="fa fa-search"></i></button>
+                    </form>
+                    <script>
+                        $(function() {
+                            $("#query").autocomplete({
+                                source: "/search_auto/",
+                                select: function(event, ui) { //item selected
+                                    AutoCompleteSelectHandler(event, ui)
+                                },
+                                minLength: 2,
+                            });
+                        });
+
+                        function AutoCompleteSelectHandler(event, ui) {
+                            var selectedObj = ui.item;
+                        }
+                    </script>
+                </div>
+                <div class="col-md-5 col-lg-6 col-sm-12" style="float:right;">
+                    <div class="jun__header__top__right">
+                        {% if user.id is None %}
+                        <ul class="accounting d-flex justify-content-lg-end justify-content-md-end justify-content-start align-items-center">
+                            <li><a href="/login/">Giriş</a></li>
+                            <li><a href="/join/">Kayıt</a></li>
+                        </ul>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Header Top Area -->
+    <!-- Start Mainmenu Area -->
+    {% load static %}
+    <div class="mainmenu__wrapper bg__cat--1 poss-relative  ">
+        <div class="container">
+            <div class="row d-none d-lg-flex">
+                <div class="col-sm-4 col-md-6 col-lg-2 order-1 order-lg-1">
+                    <div class="logo">
+                        <a href="/">
+                            <img src="{{ ayar.logo.url }} " alt="logo images" style="width:110px;height:80px;border-radius:20px;background-size:150px 150px;margin-top:-10px;">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-2 col-lg-9 order-3 order-lg-2">
+                    <div class="mainmenu__wrap">
+                        <nav class="mainmenu__nav">
+
+                            <ul class="mainmenu">
+                                <li class="drop"><a href="" onclick="return false">Kategoriler</a> {% load mptt_tags %}
+                                    <ul class="dropdown__menu" style="background-color:lightgreen">
+                                        {% recursetree categori %}
+                                        <li class="drop">{% if node.is_leaf_node %}<a href="/categori/{{ node.id }}/{{ node.slug }}" style="color:#001;">
+
+														{{ node.title }}</a> {% else %}
+                                            <a href="" onclick="return false" style="color:#001;">{{ node.title }}</a> {% endif %} {% if not node.is_leaf_node %}
+                                            <ul class="dropdown__menu" style="margin-left:200px;margin-top:-44px;
+														background-color:#9ff0e5;">
+                                                {{ children }}
+                                            </ul>
+                                            {% endif %}
+                                        </li>
+                                        {% endrecursetree %}
+                                        </ul>
+
+                                </li>
+                                <li><a href="/">Ana Sayfa</a></li>
+                                {% for rs in menu %}
+                                <li class="drop"><a href="" onclick="return false">{{rs.title}}</a>
+
+                                    <ul class="dropdown__menu">
+                                        {% for pl in menu_icerik %} {% if pl.Categori_id == rs.id %}
+                                        <li><a href="/content/{{pl.id}}/{{pl.slug}}">{{pl.title}}</a></li>
+                                        {% endif %} {% endfor %}
+                                        <li> <a  href="/faq">Sıkça sorulan sorular </a></li>
+
+                                    </ul>
+                                </li>
+                                {% endfor %}
+                                <li><a href="/referans">Referanslar</a></li>
+                                <li><a href="/hakimizda">Hakkımızda</a></li>
+                                <li><a href="/iletisim">İletişim</a></li>
+                                {% if user.id is not None %}
+                                <li class="drop"><a href="" onclick="return false" style="color:#640000"><i class="fa fa-home"style="color:#001"></i> Hesabım</a>
+                                    <ul class="dropdown__menu">
+                                        <li><a href="/user">Profil</a></li>
+                                        <li><a href="/user/orders">Siparişlerim</a></li>
+                                        <li><a href="/user/comments">Yorumlarım</a></li>
+                                        <li><a href="/logout/">Çıkış</a></li>
+                                    </ul>
+                                </li>{% endif %}
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+				{% if user.id is not None %}
+                <div class="col-lg-1 col-sm-4 col-md-4 order-2 order-lg-3">
+                    <div class="shopbox d-flex justify-content-end align-items-center">
+                        <a href="/order/shopcart">
+                            <i class="fa fa-shopping-basket"></i>
+							<span>{{request.session.cart_item}}</span>
+                        </a>
+                    </div>
+                </div>
+				{% endif %}
+            </div>
+            <!-- Mobile Menu -->
+            <div class="mobile-menu d-block d-lg-none">
+                <div class="logo">
+                    <a href="/"><img src=" {{ayar.logo.url}} " alt="logo"></a>
+                </div>
+                <a class="minicart-trigger" href="#">
+                    <i class="fa fa-shopping-basket"></i>
+                </a>
+            </div>
+            <!-- Mobile Menu -->
+        </div>
+    </div>
+    <!-- End Mainmenu Area -->
+</header>
+{% if messages %}
+								{% for message in messages %}
+									<div class="alert alert-{{message.tags}}" role="alert">
+									{{ message }}
+									</div>
+									{% endfor %}
+							{% endif %}
+<!-- //Header -->

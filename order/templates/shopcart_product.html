@@ -1,0 +1,121 @@
+{% extends "homebase.html" %}
+    {% block tittle %}ShopCart{% endblock %}
+    	{% block head %}
+        <link rel="shortcut icon" href='{{ayar.icon.url}}'/>
+        {% endblock %}
+	
+    {% block header %} 
+        {% include "header.html" %}  
+	{% endblock %}
+		{% block content %}
+	<!-- Start Bradcaump area -->
+	
+        <div class="ht__bradcaump__area">
+		{% load static %}
+            <div class="ht__bradcaump__container">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="bradcaump__inner text-center">
+                                <nav class="bradcaump-inner">
+                                  <a class="breadcrumb-item" href="/">Ana Sayfa</a>
+                                 
+                                  <span class="breadcrumb-item active">ShopCart</span> 
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Bradcaump area -->
+		  <!-- cart-main-area start -->
+        <div class="cart-main-area section-padding--lg bg--white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 ol-lg-12">
+                        <form action="#">               
+                            <div class="table-content table-responsive">
+                                <table>
+                                    <thead>
+                                        <tr class="title-top">
+                                            <th class="product-thumbnail">Resim</th>
+                                            <th class="product-name">Ürün</th>
+                                            <th class="product-price">Fiyat</th>
+                                            <th class="product-quantity">Miktar</th>
+                                            <th class="product-subtotal">Toplam</th>
+                                            <th class="product-remove">Sil</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+									{% for rs in shopcart%}
+                                        <tr>
+                                            <td class="product-thumbnail"><a href="#"><img src="{{rs.urun.image.url}}" alt="product img" /></a></td>
+                                            <td class="product-name"><a href="#">{{rs.urun}}</a></td>
+                                            <td class="product-price"><span class="amount">{{rs.urun.price}} TL</span></td>
+                                            <td class="product-quantity">{{rs.quantity}}</td>
+                                            <td class="product-subtotal">{{rs.amount}} TL</td>
+                                            <td class="product-remove"><a href="/order/deletefromcart/{{rs.id}}" onclick="return confirm('Ürün sepetden silinecek, eminmisin?')"><i class="fa fa-trash"></i></a></td>
+                                        </tr>
+									{% endfor%}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </form> 
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 offset-lg-6">
+                        <div class="cartbox__total__area">
+						 </form>
+							 <div class="cartbox-total d-flex justify-content-between">
+                                <ul class="cart__total__list">
+                                    <li>Masa Seçiniz</li>
+                                </ul>
+                                <ul class="cart__total__tk">
+                                    <li>
+                                        <select name='masa'style="width: 100px" >
+                                            <option value="1">Masa 1</option>
+                                            <option value="2">Masa 2</option>
+                                            <option value="3">Masa 3</option>
+                                            <option value="4">Masa 4</option>
+                                            <option value="5">Masa 5</option>
+                                            <option value="6">Masa 6</option>
+                                            <option value="7">Masa 7</option>
+                                            <option value="8">Masa 8</option>
+                                            <option value="9">Masa 9</option>
+                                            <option value="10">Masa 10</option>
+                                            <option value="11">Masa 11</option>
+                                            <option value="12">Masa 12</option>
+                                            <option value="13">Masa 13</option>
+                                            <option value="14">Masa 14</option>
+                                            <option value="15">Masa 15</option>
+                                        </select>
+                                        </li>
+                                </ul>
+                            </div>
+                            <div class="cart__total__amount">
+                                <span>Toplam Fiyat</span>
+                                <span>{{total}} TL</span>
+                            </div>
+							<div class="cart__total__amount">
+
+
+											{% csrf_token %}
+                                            {% if total != 0 %}
+											<input type="submit" onclick="return confirm('Ürünler sipariş verilecek. Onaylıyormusunuz ?')" class="dcare__btn min__height-btn" value="Sipariş Ver">
+
+                                            {% else %}
+                                                <input disabled type="button" class="dcare__btn btn__gray min__height-btn" value="Sipariş Ver">
+                                                <span>Sipariş vermek için ürün ekleyiniz</span>
+                                            {% endif %}
+                               
+                            </div>
+							 </form>
+                        </div>
+                    </div>
+                </div>
+            </div>  
+        </div>
+	
+        {% endblock %}

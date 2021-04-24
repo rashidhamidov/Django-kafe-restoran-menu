@@ -1,0 +1,104 @@
+{% extends "homebase.html" %}
+    {% block tittle %}Giriş{% endblock %}
+    	{% block head %}
+        <link rel="shortcut icon" href='{{ayar.icon.url}}'/>
+        {% endblock %}
+	{% block header %}
+    {% include "header.html" %} {% endblock %}
+    {% block content %}
+	<!-- Start Bradcaump area -->
+	
+        <div class="ht__bradcaump__area">
+		{% load static %}
+            <div class="ht__bradcaump__container">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="bradcaump__inner text-center">
+                                <nav class="bradcaump-inner">
+                                  <a class="breadcrumb-item" href="/">Ana Sayfa</a>
+                                  <span class="brd-separetor"><img src="{% static 'images/icons/brad.png' %}" alt="separator images"></span>
+                                  <span class="breadcrumb-item active">Giriş</span>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Bradcaump area -->
+        	<div class="container_contact" >
+			<div class="contact_f" align="center">
+        			       <!-- Start Contact Form -->
+						   <h1>Giriş Paneli</h1>
+		<form class="contact_formu" action="" method="post" > 
+						{% if messages %}
+								{% for message in messages %}
+									<div class="alert alert-{{message.tags}}" role="alert">
+									{{ message }}
+									</div>
+									{% endfor %}
+							{% endif %}
+					{% csrf_token %}
+                    <div class="single-input">
+                        <input name="username"  type="text" placeholder="Kullanıcı adı">
+                    </div>
+                    <div class="single-input">
+                        <input name="password" type="password" placeholder="Şifre">
+                    </div>
+                        <input type="submit" id="dugme_gonder" value="Giriş Yap" />
+          
+</form>
+        	</div>
+			
+			</div>
+			
+			
+		
+<style>
+.container_contact {
+width:80%;
+margin-left:10%;
+height:400px;
+
+}
+.contact_f{
+	width:50%;
+	height:auto;
+	margin-left:25%;
+
+}
+
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+
+.contact_formu { max-width:420px;margin:50px 0 0 0;}
+
+.contact_formu input {
+  color:#111;
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight:500;
+  font-size: 18px;
+  border-radius: 5px;
+  line-height: 22px;
+  background-color:#ddd;
+  border:2px solid lightgreen;
+  transition: all 0.3s;
+  padding: 13px;
+  margin-bottom: 15px;
+  width:100%;
+  box-sizing: border-box;
+  outline:0;
+}
+#dugme_gonder{
+background-color:lightgreen;
+}
+#dugme_gonder:hover {
+background-color:#20cc20;
+color:#f2ddcc;
+}
+</style>
+        <!-- End Contact Form -->
+        
+		
+ 
+        {% endblock %}

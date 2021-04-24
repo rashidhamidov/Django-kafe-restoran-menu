@@ -1,0 +1,114 @@
+<!-- Footer Area -->
+
+{% load static %}
+<footer id="footer" class="footer-area footer--2">
+    <div class="footer__wrapper bg-image--10 section-padding--lg">
+        <div class="container" style="width:90%;margin-left:5%;">
+            <div class="row">
+                <!-- Start Single Widget -->
+                <div class="col-lg-3 col-md-6 col-sm-12" style="margin-right:50px;">
+                    <div class="footer__widget">
+                        <div class="ft__logo">
+                            <a href="/">
+                                <img src=" {{ayar.logo.url}}" alt="logo images" style="width:400px;height:200px;border-radius:20px;">
+                            </a>
+                        </div>
+                        <div class="ftr__details">
+                            <p>{{ayar.description}}</p>
+                        </div>
+                        <div class="ftr__address__inner">
+                            <div class="footer__social__icon">
+                                <ul class="dacre__social__link--2 d-flex justify-content-start">
+                                    <li class="facebook"><a href="{{ayar.facebook}}"><i class="fa fa-facebook"></i></a></li>
+                                    <li class="twitter"><a href="{{ayar.twitter}}"><i class="fa fa-twitter"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Single Widget -->
+                <!-- Start Single Widget -->
+                <div class="col-lg-2 col-md-6 col-sm-12 md-mt-40 sm-mt-40">
+                    <div class="footer__widget">
+                        <h4>Sayfalar</h4>
+                        <div class="footer__innner">
+                            <div class="ftr__latest__post">
+                                <ul>
+                                    <li><a href="/">Ana Sayfa</a></li>
+                                    <li><a href="/hakimizda">Hakkımızda</a></li>
+                                    <li><a href="/referans">Referanslar</a></li>
+                                    <li><a href="/iletisim">İletişim</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Single Widget -->
+                <!-- Start Single Wedget -->
+                <div class="col-lg-2 col-md-6 col-sm-12 md-mt-40 sm-mt-40" style="margin-right:50px;">
+                    <div class="footer__widget">
+                        <h4>Kategoriler</h4>
+                        <div class="footer__innner">
+                            <div class="ftr__latest__post">
+                                {% load mptt_tags %}
+                                <ul>
+                                    {% recursetree categori %}
+                                    <li><a href="/categori/{{ node.id }}/{{ node.slug }}" style="text-decoration:underline;">
+													
+														{{ node.title }}</a> {% if not node.is_leaf_node %}
+                                        <ul>
+                                            <li><a>{{ children }}</a></li>
+                                        </ul>
+                                        {% endif %}
+                                    </li>
+                                    {% endrecursetree %}
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Single Wedget -->
+                <!-- Start Single Widget -->
+                <div class="col-lg-3 col-md-6 col-sm-12 md-mt-40 sm-mt-40">
+                    <div class="footer__widget">
+                        <h4>Adress</h4>
+                        <div class="footer__innner">
+                            <div class="dcare__twit__wrap">
+                                <!-- Start Single -->
+                                <div class="dcare__twit d-flex">
+                                    <div class="dcare__twit__details">
+                                        <p>{{ayar.adress}}</p>
+                                        <p>{{ayar.phone}}</p>
+                                        <p>{{ayar.email}}</p>
+                                        <span><i class="fa fa-calendar"></i>{{ayar.update_at}}</span>
+                                    </div>
+                                </div>
+                                <!-- End Single -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Single Widget -->
+            </div>
+        </div>
+    </div>
+    <div class="copyright  bg--theme">
+        <div class="container">
+            <div class="row align-items-center copyright__wrapper justify-content-center">
+                <div class="col-lg-12 col-sm-12 col-md-12">
+                    <div class="coppy__right__inner text-center">
+                        <p>Copyright <i class="fa fa-copyright"></i> 2020 <a href="/" target="_blank">{{ayar.baslik}}</a> All rights reserved. </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- //Footer Area -->
+
+<!-- //Cartbox -->
+<script src="{% static 'js/popper.min.js' %} "></script>
+<script src="{% static 'js/bootstrap.min.js' %} "></script>
+<script src="{% static 'js/plugins.js' %} "></script>
+<script src="{% static 'js/active.js' %} "></script>

@@ -1,0 +1,110 @@
+{% extends "homebase.html" %}
+    {% block tittle %}Kayıt{% endblock %}
+    	{% block head %}
+        <link rel="shortcut icon" href='{{ayar.icon.url}}'/>
+        {% endblock %}
+	{% block header %}
+    {% include "header.html" %} {% endblock %}
+    {% block content %}
+	<!-- Start Bradcaump area -->
+	
+        <div class="ht__bradcaump__area">
+		{% load static %}
+            <div class="ht__bradcaump__container">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="bradcaump__inner text-center">
+                                <nav class="bradcaump-inner">
+                                  <a class="breadcrumb-item" href="/">Ana Sayfa</a>
+                                  <span class="brd-separetor"><img src="{% static 'images/icons/brad.png' %}" alt="separator images"></span>
+                                  <span class="breadcrumb-item active">Kayıt</span>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Bradcaump area -->
+        	<div class="container_contact" >
+			<div class="contact_f" align="center">
+        			       <!-- Start Contact Form -->
+						   <h1>Kayıt</h1>
+		<form class="contact_formu"  method="post" > 
+						{% if messages %}
+								{% for message in messages %}
+									<div class="alert alert-{{message.tags}}" role="alert">
+									{{ message }}
+									</div>
+									{% endfor %}
+							{% endif %}
+						{% csrf_token %}
+					{% for field in form %}
+					<p>
+					{{field.label_tag }}<br>
+					{{field}}
+					{% if field.help_text %}
+						<small> {{ field.help_text }}</small>
+						{% endif %}
+					{% for error in field.errors %}
+						<p style="color:red">{{error}}</p>
+						{% endfor %}
+					</p>
+					{% endfor %}
+                        <input type="submit" id="dugme_gonder" value="Kayıt Yap" />
+          
+</form>
+        	</div>
+			
+			</div>
+			
+			
+		
+<style>
+.container_contact {
+width:80%;
+margin-left:10%;
+height:900px;
+
+}
+.contact_f{
+	width:50%;
+	height:auto;
+	margin-left:25%;
+
+}
+
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+
+.contact_formu { max-width:900px;margin:20px 0 0 0;}
+
+.contact_formu input {
+  color:#111;
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight:500;
+  font-size: 18px;
+  border-radius: 5px;
+  line-height: 16px;
+  background-color:#ddd;
+  border:2px solid lightgreen;
+  transition: all 0.3s;
+  padding: 13px;
+  margin-bottom: 5px;
+  width:100%;
+  box-sizing: border-box;
+  outline:0;
+}
+#dugme_gonder{
+background-color:lightgreen;
+}
+#dugme_gonder:hover {
+background-color:#20cc20;
+color:#f2ddcc;
+}
+</style>
+        <!-- End Contact Form -->
+        
+		
+ 
+        {% endblock %}
